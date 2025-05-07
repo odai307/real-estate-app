@@ -9,6 +9,7 @@ node_modules/
 # Production
 /build
 /dist
+dist-ssr
 
 # Environment files
 .env
@@ -18,16 +19,26 @@ node_modules/
 .env.production.local
 
 # Debug logs
+logs
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # IDE
 .idea/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
 *.swp
 *.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # OS
 .DS_Store
-Thumbs.db 
+Thumbs.db
