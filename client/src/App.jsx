@@ -72,7 +72,7 @@ function App() {
         </Box>
 
         {/* Main Content */}
-        <Container maxWidth="lg" className="py-16">
+        <Container maxWidth="lg" className="py-16 mt-12">
           <Routes>
             <Route path="/" element={<Properties />} />
           </Routes>

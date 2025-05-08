@@ -43,8 +43,20 @@ body {
   background: var(--primary-700);
 }
 
-/* Card hover effects */
+/* Property cards layout */
+.properties {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
 .properties .MuiCard-root {
+  width: 400px !important;
+  margin: 1rem;
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 

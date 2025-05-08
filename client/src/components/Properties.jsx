@@ -55,59 +55,59 @@ const Properties = () => {
       {properties.length === 0 ? (
         <p className="text-center text-gray-500">No properties available</p>
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl mx-auto">
+        <div className="flex flex-wrap justify-center max-w-7xl mx-auto">
           {properties.map((property) => (
-            <Card key={property.id} className="shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <Card key={property.id} className="shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-[400px] m-4">
               <div className="flex flex-col">
                 <CardMedia
                   component="img"
-                  className="w-full h-48 object-cover"
+                  className="w-full h-12 object-cover"
                   image={property.image}
                   alt={property.title}
                 />
-                <CardContent className="p-4">
-                  <div className="flex justify-between items-start mb-2">
-                    <Typography variant="h6" className="text-lg font-semibold">
+                <CardContent className="p-3">
+                  <div className="flex justify-between items-start mb-1">
+                    <Typography variant="subtitle1" className="font-semibold">
                       {property.title}
                     </Typography>
-                    <Typography variant="h6" className="text-primary-600 font-bold">
+                    <Typography variant="subtitle1" className="text-primary-600 font-bold">
                       ${property.price.toLocaleString()}
                     </Typography>
                   </div>
                   
-                  <div className="flex items-center text-gray-600 mb-3">
-                    <LocationOn className="text-sm mr-1" />
-                    <Typography variant="body2">
+                  <div className="flex items-center text-gray-600 mb-2">
+                    <LocationOn className="text-xs mr-1" />
+                    <Typography variant="body2" className="text-sm">
                       {property.location}
                     </Typography>
                   </div>
 
-                  <div className="flex items-center space-x-4 mb-3 text-gray-600">
+                  <div className="flex items-center space-x-3 mb-2 text-gray-600">
                     <div className="flex items-center">
-                      <Hotel className="text-sm mr-1" />
-                      <Typography variant="body2">{property.bedrooms} beds</Typography>
+                      <Hotel className="text-xs mr-1" />
+                      <Typography variant="body2" className="text-sm">{property.bedrooms}</Typography>
                     </div>
                     <div className="flex items-center">
-                      <Bathtub className="text-sm mr-1" />
-                      <Typography variant="body2">{property.bathrooms} baths</Typography>
+                      <Bathtub className="text-xs mr-1" />
+                      <Typography variant="body2" className="text-sm">{property.bathrooms}</Typography>
                     </div>
                     <div className="flex items-center">
-                      <SquareFoot className="text-sm mr-1" />
-                      <Typography variant="body2">{property.area} sq ft</Typography>
+                      <SquareFoot className="text-xs mr-1" />
+                      <Typography variant="body2" className="text-sm">{property.area}</Typography>
                     </div>
                   </div>
 
-                  <Typography variant="body2" className="text-gray-600 mb-4 line-clamp-2">
+                  <Typography variant="body2" className="text-gray-600 mb-2 line-clamp-1 text-sm">
                     {property.description}
                   </Typography>
 
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {property.features.slice(0, 3).map((feature, index) => (
+                  <div className="flex flex-wrap gap-1 mb-2">
+                    {property.features.slice(0, 2).map((feature, index) => (
                       <Chip
                         key={index}
                         label={feature}
                         size="small"
-                        className="bg-gray-100 text-gray-700"
+                        className="bg-gray-100 text-gray-700 text-xs"
                       />
                     ))}
                   </div>
@@ -115,7 +115,8 @@ const Properties = () => {
                   <Button
                     variant="contained"
                     color="primary"
-                    className="w-full bg-primary-600 hover:bg-primary-700"
+                    size="small"
+                    className="w-full bg-primary-600 hover:bg-primary-700 text-sm"
                   >
                     View Details
                   </Button>
