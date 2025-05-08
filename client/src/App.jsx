@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Typography, Button, Container, Box } from '@mui/materi
 import { Home, Search, Favorite, Person } from '@mui/icons-material';
 import './App.css';
 import HomePage from './pages/HomePage';
+import PropertyDetails from './pages/PropertyDetails';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         {/* Main Content */}
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/property/:id" element={<PropertyDetails />} />
         </Routes>
 
         {/* Footer */}

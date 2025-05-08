@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, Typography, Button, CircularProgress, CardMedia, Chip, Stack } from '@mui/material';
-import { LocationOn, Hotel, Bathtub, SquareFoot } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { Card, CardContent, Typography, Button, CircularProgress, CardMedia, Chip } from '@mui/material';
 
 const Properties = () => {
+  const navigate = useNavigate();
   const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const parseFeatures = (features) => {
+    try {
+      return typeof features === 'string' ? JSON.parse(features) : features;
+    } catch (e) {
+      return features.split(',').map(f => f.trim());
+    }
+  };
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -16,7 +25,6 @@ const Properties = () => {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
         const result = await response.json();
-        console.log('Fetched properties:', result);
         if (result.success) {
           setProperties(result.data);
         } else {
@@ -57,7 +65,11 @@ const Properties = () => {
       ) : (
         <div className="flex flex-wrap justify-center max-w-7xl mx-auto">
           {properties.map((property) => (
-            <Card key={property.id} className="shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-[400px] m-4">
+            <Card 
+              key={property.id} 
+              className="shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 w-[400px] m-4 cursor-pointer"
+              onClick={() => navigate(`/property/${property.id}`)}
+            >
               <div className="flex flex-col">
                 <CardMedia
                   component="img"
@@ -75,26 +87,16 @@ const Properties = () => {
                     </Typography>
                   </div>
                   
-                  <div className="flex items-center text-gray-600 mb-2">
-                    <LocationOn className="text-xs mr-1" />
-                    <Typography variant="body2" className="text-sm">
-                      {property.location}
-                    </Typography>
-                  </div>
+                  <Typography variant="body2" className="text-gray-600 mb-2">
+                    {property.location}
+                  </Typography>
 
                   <div className="flex items-center space-x-3 mb-2 text-gray-600">
-                    <div className="flex items-center">
-                      <Hotel className="text-xs mr-1" />
-                      <Typography variant="body2" className="text-sm">{property.bedrooms}</Typography>
-                    </div>
-                    <div className="flex items-center">
-                      <Bathtub className="text-xs mr-1" />
-                      <Typography variant="body2" className="text-sm">{property.bathrooms}</Typography>
-                    </div>
-                    <div className="flex items-center">
-                      <SquareFoot className="text-xs mr-1" />
-                      <Typography variant="body2" className="text-sm">{property.area}</Typography>
-                    </div>
+                    <Typography variant="body2" className="text-sm">{property.bedrooms} Beds</Typography>
+                    <Typography variant="body2" className="text-sm">•</Typography>
+                    <Typography variant="body2" className="text-sm">{property.bathrooms} Baths</Typography>
+                    <Typography variant="body2" className="text-sm">•</Typography>
+                    <Typography variant="body2" className="text-sm">{property.area} sq ft</Typography>
                   </div>
 
                   <Typography variant="body2" className="text-gray-600 mb-2 line-clamp-1 text-sm">
@@ -102,7 +104,7 @@ const Properties = () => {
                   </Typography>
 
                   <div className="flex flex-wrap gap-1 mb-2">
-                    {property.features.slice(0, 2).map((feature, index) => (
+                    {parseFeatures(property.features).slice(0, 2).map((feature, index) => (
                       <Chip
                         key={index}
                         label={feature}
@@ -117,6 +119,10 @@ const Properties = () => {
                     color="primary"
                     size="small"
                     className="w-full bg-primary-600 hover:bg-primary-700 text-sm"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      navigate(`/property/${property.id}`);
+                    }}
                   >
                     View Details
                   </Button>
